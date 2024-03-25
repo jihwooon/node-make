@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import oc from "open-color";
-import { ReactComponent as MussgImage } from "@/assets/mussg.svg";
+import { ReactComponent as MussgImage } from "../assets/mussg.svg";
 
 export const IndexTemplate: React.FC = () => {
   return (
