@@ -11,6 +11,16 @@ services:
       - notes
     volumes:
       - ./db:/var/lib/mysql
+  
+  backend:
+    image: lts-backend
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+    ports:
+      - 3031:3031
+    networks:
+      - notes
 
 networks:
   notes:
