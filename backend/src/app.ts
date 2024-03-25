@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import cors from "cors";
+import healthcheck from './routers/healthcheck'
 
 const app = express();
 
@@ -16,5 +17,7 @@ app.use(
     credentials: true,
   }
 ));
+
+app.use(healthcheck)
 
 export { app };
