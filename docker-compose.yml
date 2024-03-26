@@ -21,6 +21,15 @@ services:
       - 3031:3031
     networks:
       - notes
+  
+  fronted:
+    image: lts-front
+    environment:
+     REACT_APP_API_BASE_URL: http://localhost:3031
+    ports:
+      - 3000:3000
+    networks:
+      - notes 
 
 networks:
-  notes:
+  notes: {}
