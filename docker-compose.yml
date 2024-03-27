@@ -3,7 +3,9 @@ version: "3.8"
 services:
   db:
     image: mariadb:11.2.2
+    container_name: note-mariadb
     environment:
+      TZ: Asia/Seoul
       MARIADB_ROOT_PASSWORD: root
     ports:
       - 3032:3306
