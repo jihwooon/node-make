@@ -6,6 +6,6 @@ COPY build ./build
 
 EXPOSE 3000
 
-COPY ./script/docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
