@@ -14,7 +14,7 @@
 - Grafana + Slack
 
 # ⚠️아키텍쳐
-!["Architecture"](docs/Architecture.jpg)
+!["Architecture"](docs/AWS-architecture.jpg)
 
 # 🏗️ERD
 !["note_database"](docs/Note_ERD.png)
