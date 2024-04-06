@@ -8,6 +8,14 @@ dotenv.config();
 
 const router = express.Router();
 
+/**
+ * 사용자 생성 API
+ * 
+ * @route POST /users
+ * @param {string} email - 사용자 이메일
+ * @param {string} password - 사용자 비밀번호
+ * @returns {number} - HTTP 상태 코드
+ */
 router.post('/users', async (req, res) => {
     const { email, password } = req.body
     try {
@@ -19,6 +27,13 @@ router.post('/users', async (req, res) => {
     res.sendStatus(201);
 });
 
+/**
+ * 로그인 API
+ * 
+ * @route POST /login
+ * @param {string} email - 사용자 이메일
+ * @returns {number} - HTTP 상태 코드
+ */
 router.post('/login', async (req, res) => {
     const { email } = req.body;
     const findEmail = await findByEmail(email);
@@ -27,6 +42,11 @@ router.post('/login', async (req, res) => {
         return;
     }
 
+    /**
+     * 액세스 토큰입니다.
+     * 
+     * @type {string}
+     */
     const accessToken = jwt.sign({ email }, process.env.JWT_SECRET as string, { expiresIn: '14d' });
 
     res.cookie('access-token', accessToken, {
@@ -37,6 +57,13 @@ router.post('/login', async (req, res) => {
     res.sendStatus(204);
 })
 
+/**
+ * 내 정보 조회 API
+ * 
+ * @route GET /users/me
+ * @returns {Object} - 사용자 정보
+ * @returns {string} email - 사용자 이메일
+ */
 router.get('/users/me', async (req, res) => {
     const token = req.cookies['access-token'];
     if (!token) {
@@ -60,11 +87,16 @@ router.get('/users/me', async (req, res) => {
     });
 });
 
+/**
+ * 로그아웃 API
+ * 
+ * @route DELETE /logout
+ * @returns {number} - HTTP 상태 코드
+ */
 router.delete('/logout', async (req, res) => {
     res.clearCookie('access-token');
 
     res.sendStatus(204);
 })
-
 
 export default router;
