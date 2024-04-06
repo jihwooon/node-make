@@ -10,4 +10,12 @@ export class User {
     static async create({ email, password }: { email: string, password: string }) {
         return new User(email, password);
     }
+
+    getEmail() {
+        return this.email;
+    }
+
+    getPassword() {
+        return this.password;
+    }
 }
