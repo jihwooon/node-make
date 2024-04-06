@@ -2,7 +2,7 @@ import express from 'express';
 import { User } from '../model/user';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv"
-import { save } from '../model/user.repository'
+import { findByEmail, save } from '../model/user.repository'
 
 dotenv.config();
 
@@ -21,6 +21,12 @@ router.post('/users', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email } = req.body;
+    const findEmail = await findByEmail(email);
+    if (!findEmail) {
+        res.sendStatus(404);
+        return;
+    }
+
     const accessToken = jwt.sign({ email }, process.env.JWT_SECRET as string, { expiresIn: '14d' });
 
     res.cookie('access-token', accessToken, {
