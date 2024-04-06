@@ -37,5 +37,28 @@ router.post('/login', async (req, res) => {
     res.sendStatus(204);
 })
 
+router.get('/users/me', async (req, res) => {
+    const token = req.cookies['access-token'];
+    if (!token) {
+        res.sendStatus(401);
+        return;
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET as string, async (error: any, decoded: any) => {
+        if (error) {
+            res.sendStatus(401);
+            return;
+        }
+
+        const user = await findByEmail(decoded.email);
+        if (!user) {
+            res.sendStatus(404);
+            return;
+        }
+
+        res.json({ email: user.getEmail() });
+    });
+});
+
 
 export default router;
