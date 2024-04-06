@@ -60,5 +60,11 @@ router.get('/users/me', async (req, res) => {
     });
 });
 
+router.delete('/logout', async (req, res) => {
+    res.clearCookie('access-token');
+
+    res.sendStatus(204);
+})
+
 
 export default router;
