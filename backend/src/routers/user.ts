@@ -2,7 +2,7 @@ import express from 'express';
 import { User } from '../model/user';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv"
-
+import { save } from '../model/user.repository'
 
 dotenv.config();
 
@@ -10,17 +10,16 @@ const router = express.Router();
 
 router.post('/users', async (req, res) => {
     const { email, password } = req.body
-    console.log(email)
     try {
-        await User.create({ email, password });
+        const user = await User.create({ email, password });
+        save(user);
     } catch (error) {
         throw error;
     }
     res.sendStatus(201);
 });
 
-
-router.get('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { email } = req.body;
     const accessToken = jwt.sign({ email }, process.env.JWT_SECRET as string, { expiresIn: '14d' });
 
