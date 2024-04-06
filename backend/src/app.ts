@@ -3,10 +3,12 @@ import "express-async-errors";
 import cors from "cors";
 import user from './routers/user'
 import healthcheck from './routers/healthcheck'
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
