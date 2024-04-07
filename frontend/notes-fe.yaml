@@ -1,0 +1,42 @@
+apiVersion: apps/v1 
+kind: Deployment
+
+metadata:
+  name: notes-fe 
+  namespace: prgms-notes
+spec: 
+  selector:
+    matchLabels: 
+      run: notes-fe
+  replicas: 1 
+  template:
+    metadata: 
+      labels:
+        run: notes-fe 
+    spec:
+      containers:
+      - name: notes-frontend
+        image: jihwooon/note-frontend:lts 
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 3000 
+        env:
+        - name: REACT_APP_API_BASE_URL
+
+---
+
+apiVersion: v1 
+kind: Service
+
+metadata: 
+  name: notes-fe 
+  labels:
+    run: notes-fe 
+  namespace: prgms-notes
+spec:
+  type: NodePort 
+  selector:
+    run: notes-fe 
+  ports:
+  - port: 3000
+    nodePort: 30030

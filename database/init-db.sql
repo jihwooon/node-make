@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS `prgms_notes` DEFAULT CHARACTER SET utf8mb4;
-USE `prgms_notes`
+USE `prgms_notes`;
 
 -- 사용자 테이블 생성
 CREATE TABLE IF NOT EXISTS users (
