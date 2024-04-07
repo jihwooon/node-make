@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notes-be-config
+  namespace: prgms-notes
+data:
+  DB_HOST: notes-db.db
+  DB_PORT: Default(3306)
+  DB_USER: prgms
+  DB_PASSWD: root
+  DB_NAME: prgms_notes
+  CORS_ALLOWED_ORIGIN: http://localhost:30030
