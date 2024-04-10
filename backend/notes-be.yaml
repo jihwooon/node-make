@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notes-be-config
+  namespace: prgms-notes
+data:
+  DB_HOST: jihwooon.prgms-fullcycle.com
+  DB_USER: prgms
+  DB_PASSWD: prgms
+  DB_NAME: prgms_notes
+  CORS_ALLOWED_ORIGIN: https://jihwooon.prgms-fullcycle.com
+
+---
+
 apiVersion: apps/v1 
 kind: Deployment
 
@@ -16,7 +30,7 @@ spec:
     spec:
       containers:
       - name: notes-backend
-        image: jihwooon/note-backend:lts 
+        image: 180993267331.dkr.ecr.ap-northeast-2.amazonaws.com/jihwooon-be:latest
         imagePullPolicy: Always 
         envFrom:
         - configMapRef:
