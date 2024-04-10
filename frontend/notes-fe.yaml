@@ -23,6 +23,8 @@ spec:
         env:
         - name: REACT_APP_API_BASE_URL
           value: https://jihwooon.prgms-fullcycle.com/api/
+      imagePullSecrets:
+      - name: aws-ecr-cred
 
 ---
 
